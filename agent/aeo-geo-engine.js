@@ -67,7 +67,11 @@ function generateAeoQuickAnswer(topic, primaryKeyword) {
     }
   };
 
-  const key = Object.keys(templates).find(k => topic.toLowerCase().includes(k)) || 'first_flush';
+  const normalized = topic.toLowerCase().replace(/[-_]/g, ' ');
+  const key = Object.keys(templates).find(k => {
+    const kNorm = k.replace(/[-_]/g, ' ');
+    return normalized.includes(kNorm) || kNorm.split(' ').every(w => normalized.includes(w));
+  }) || 'first_flush';
   return templates[key];
 }
 

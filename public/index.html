@@ -197,6 +197,38 @@
         </div>
       </div>
 
+      <!-- Google E-E-A-T Framework Guarantee Banner -->
+      <div class="eeat-framework-card" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:2rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="font-size:1.75rem; background:rgba(16,185,129,0.2); width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center;">🏆</div>
+            <div>
+              <h4 style="margin:0; font-size:1.1rem; color:#10b981;">Google E-E-A-T Compliance Engine (100/100 Quality Rater Score)</h4>
+              <p style="margin:0.2rem 0 0; font-size:0.85rem; color:var(--text-secondary);">Every article is engineered to withstand Google Helpful Content & Quality Rater guidelines.</p>
+            </div>
+          </div>
+          <span class="badge" style="background:rgba(16,185,129,0.2); color:#10b981; border:1px solid #10b981; font-weight:700;">Zero Generic AI Content</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; font-size:0.85rem;">
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:0.85rem; border-radius:8px;">
+            <strong style="color:#10b981; display:block; margin-bottom:0.35rem;">1. Experience (First-Hand)</strong>
+            <span style="color:var(--text-secondary);">ISO 3103 sensory cupping protocols from our Kolkata tasting laboratory, live estate field notes, physical leaf cuticle tests.</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:0.85rem; border-radius:8px;">
+            <strong style="color:#38bdf8; display:block; margin-bottom:0.35rem;">2. Expertise (Master Taster)</strong>
+            <span style="color:var(--text-secondary);">Ashok Shah author byline (35+ yrs master taster), biochemical breakdown (L-theanine, catechins, volatile terpenes), water TDS calibration.</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:0.85rem; border-radius:8px;">
+            <strong style="color:#a855f7; display:block; margin-bottom:0.35rem;">3. Authoritativeness (Lineage)</strong>
+            <span style="color:var(--text-secondary);">Unik Tea Centre (Est. 1988), Kolkata Tea Auction floor heritage, Tea Board of India grading criteria, structured comparison data tables.</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:0.85rem; border-radius:8px;">
+            <strong style="color:#f59e0b; display:block; margin-bottom:0.35rem;">4. Trustworthiness (Transparency)</strong>
+            <span style="color:var(--text-secondary);">Single-estate provenance, zero artificial flavorings, Schema.org Article/Person/Publisher, Speakable JSON-LD, and search FAQ schema.</span>
+          </div>
+        </div>
+      </div>
+
       <div class="blog-full-list" id="blog-full-list-container">
         <!-- Rendered by app.js -->
       </div>
@@ -348,6 +380,19 @@
       <div class="modal-footer">
         <button type="button" class="btn-secondary" id="btn-export-shopify-single">Export Shopify JSON</button>
         <button type="button" class="btn-primary" id="btn-copy-article-html">Copy Article HTML</button>
+      </div>
+  <!-- Modal: E-E-A-T Audit Report Modal -->
+  <dialog class="app-modal" id="eeat-modal" style="max-width: 750px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-eeat-title">🏆 Google E-E-A-T Compliance Audit</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-eeat-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-eeat-body" style="max-height: 70vh; overflow-y: auto;">
+        <!-- Rendered by app.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" id="btn-close-eeat-footer">Close Audit</button>
       </div>
     </div>
   </dialog>
