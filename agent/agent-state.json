@@ -5,12 +5,27 @@
   "brand": "Brew Your Sip",
   "heritage": "Unik Tea Centre (Est. 1988, Kolkata)",
   "startedAt": "2026-09-22T08:44:40.872Z",
-  "lastRunAt": "2026-09-22T08:46:56.430Z",
+  "lastRunAt": "2026-09-22T08:52:54.799Z",
   "totalAuditsRun": 1,
   "totalBlogsCreated": 3,
   "totalGmbPostsQueued": 3,
   "shopifyThemeSynced": false,
   "logs": [
+    {
+      "timestamp": "2026-09-22T08:52:54.085Z",
+      "message": "Exported 3 SEO/AEO/GEO blog drafts into shopify-drafts/",
+      "type": "blog"
+    },
+    {
+      "timestamp": "2026-09-22T08:52:54.084Z",
+      "message": "Shopify theme: Synchronized seo-schema.liquid and updated theme.liquid with Speakable AEO tags",
+      "type": "shopify"
+    },
+    {
+      "timestamp": "2026-09-22T08:52:54.082Z",
+      "message": "Starting scheduled 24x7 autonomous optimization cycle...",
+      "type": "cron"
+    },
     {
       "timestamp": "2026-09-22T08:46:55.713Z",
       "message": "Shopify theme: Synchronized seo-schema.liquid and updated theme.liquid with Speakable AEO tags",
