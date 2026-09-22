@@ -1,0 +1,70 @@
+name: 24x7 Autonomous SEO, AEO, GEO & Local GMB Agent
+
+on:
+  # 1. Scheduled 24x7 Autonomous Cron Loops
+  schedule:
+    # Daily at 06:00 UTC (11:30 AM IST) - Daily SEO Audit & Health Check
+    - cron: '0 6 * * *'
+    # Mondays and Thursdays at 12:00 UTC - Autonomous Blog Factory (16:9 Image prompts & AEO)
+    - cron: '0 12 * * 1,4'
+    # Fridays at 08:00 UTC - Weekly Local Google Business Profile (GMB) Update
+    - cron: '0 8 * * 5'
+
+  # 2. Manual 1-Click Trigger from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Autonomous Task to Execute'
+        required: true
+        default: 'daily_cycle'
+        type: choice
+        options:
+          - 'daily_cycle'
+          - 'generate_blog'
+          - 'generate_gmb'
+          - 'audit'
+
+  # 3. Trigger on Push to Main branch
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  run-autonomous-agent:
+    name: Execute 24x7 Agent Cycle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install Agent Dependencies
+        run: npm ci || npm install
+
+      - name: 🤖 Execute Autonomous 24x7 SEO/AEO/GEO Engine
+        run: |
+          TASK_NAME="${{ github.event.inputs.task || 'daily_cycle' }}"
+          node agent/github-runner.js --task="$TASK_NAME"
+
+      - name: 💾 Commit Generated Content & State Back to GitHub
+        run: |
+          git config --global user.name "BrewYourSip-SEO-Agent[bot]"
+          git config --global user.email "agent@brewyoursip.com"
+          git add agent/agent-state.json shopify-drafts/ public/data/
+          if git diff --staged --quiet; then
+            echo "No new changes to commit."
+          else
+            git commit -m "🤖 [24x7 Agent] Automated SEO/AEO/GEO & GMB Update [skip ci]"
+            git push origin main
+          fi
