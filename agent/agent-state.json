@@ -5,12 +5,32 @@
   "brand": "Brew Your Sip",
   "heritage": "Unik Tea Centre (Est. 1988, Kolkata)",
   "startedAt": "2026-09-22T08:44:40.872Z",
-  "lastRunAt": "2026-11-27T19:49:08.641Z",
+  "lastRunAt": "2026-11-27T20:07:16.963Z",
   "totalAuditsRun": 1,
   "totalBlogsCreated": 3,
   "totalGmbPostsQueued": 3,
   "shopifyThemeSynced": false,
   "logs": [
+    {
+      "timestamp": "2026-11-27T20:07:16.962Z",
+      "message": "GitHub Actions: Synced 15 GSC queries",
+      "type": "health"
+    },
+    {
+      "timestamp": "2026-11-27T20:07:15.692Z",
+      "message": "GitHub Actions: Processed GMB post \"Fresh 2026 Darjeeling First Flush Is Here! 🌸🍃\"",
+      "type": "local"
+    },
+    {
+      "timestamp": "2026-11-27T20:07:15.690Z",
+      "message": "GitHub Actions: Created blog \"Darjeeling First Flush: The Definitive 2026 Guide to Himalayan Terroir and Spring Harvest\" [E-E-A-T: 100/100]",
+      "type": "blog"
+    },
+    {
+      "timestamp": "2026-11-27T20:07:09.923Z",
+      "message": "GitHub Actions: Verified site health (HTTP 200)",
+      "type": "health"
+    },
     {
       "timestamp": "2026-11-27T19:49:08.640Z",
       "message": "GitHub Actions: Synced 15 GSC queries",
@@ -437,7 +457,7 @@
     "connected": true,
     "siteUrl": "sc-domain:brewyoursip.com",
     "queryCount": 15,
-    "checkedAt": "2026-11-27T19:49:08.638Z"
+    "checkedAt": "2026-11-27T20:07:16.961Z"
   },
   "gscInsights": {
     "connected": true,
