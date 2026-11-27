@@ -5,12 +5,32 @@
   "brand": "Brew Your Sip",
   "heritage": "Unik Tea Centre (Est. 1988, Kolkata)",
   "startedAt": "2026-09-22T08:44:40.872Z",
-  "lastRunAt": "2026-11-27T19:41:04.878Z",
+  "lastRunAt": "2026-11-27T19:47:57.101Z",
   "totalAuditsRun": 1,
   "totalBlogsCreated": 3,
   "totalGmbPostsQueued": 3,
   "shopifyThemeSynced": false,
   "logs": [
+    {
+      "timestamp": "2026-11-27T19:47:57.100Z",
+      "message": "GitHub Actions GSC Error: User does not have sufficient permission for site 'https://www.brewyoursip.com/ '. See also: https://support.google.com/webmasters/answer/2451999.",
+      "type": "warning"
+    },
+    {
+      "timestamp": "2026-11-27T19:47:56.950Z",
+      "message": "GitHub Actions: Processed GMB post \"Fresh 2026 Darjeeling First Flush Is Here! 🌸🍃\"",
+      "type": "local"
+    },
+    {
+      "timestamp": "2026-11-27T19:47:56.948Z",
+      "message": "GitHub Actions: Created blog \"Darjeeling First Flush: The Definitive 2026 Guide to Himalayan Terroir and Spring Harvest\" [E-E-A-T: 100/100]",
+      "type": "blog"
+    },
+    {
+      "timestamp": "2026-11-27T19:47:50.989Z",
+      "message": "GitHub Actions: Verified site health (HTTP 200)",
+      "type": "health"
+    },
     {
       "timestamp": "2026-11-27T17:50:46.797Z",
       "message": "Exported 3 SEO/AEO/GEO blog drafts into shopify-drafts/",
@@ -392,5 +412,11 @@
       "imagePrompt16x9": "Cinematic 16:9 banner: A glass teapot filled with rich mahogany-colored Assam black tea, with golden sunlight catching the steam rising into the air. Next to the pot are dark brown loose tea leaves with gleaming golden tips in a handmade clay saucer, set against an earthy aesthetic kitchen counter, professional beverage photography.",
       "status": "scheduled"
     }
-  ]
+  ],
+  "gscLastStatus": {
+    "connected": false,
+    "skipped": false,
+    "reason": "User does not have sufficient permission for site 'https://www.brewyoursip.com/ '. See also: https://support.google.com/webmasters/answer/2451999.",
+    "checkedAt": "2026-11-27T19:47:57.099Z"
+  }
 }
