@@ -73,8 +73,8 @@
         <button type="button" class="btn-secondary" id="btn-open-create-blog">
           <span>✍️</span> Generate 16:9 SEO/AEO Blog
         </button>
-        <button type="button" class="btn-secondary" id="btn-sync-shopify-theme">
-          <span>🛒</span> Sync Shopify Theme (Liquid)
+        <button type="button" class="btn-secondary" id="btn-sync-wp-schema">
+          <span>📝</span> Sync WordPress Schema (PHP)
         </button>
         <button type="button" class="btn-secondary" id="btn-queue-gmb-post">
           <span>📍</span> Queue Weekly GMB Post
@@ -117,8 +117,8 @@
         <div class="agent-metric-card">
           <span class="metric-icon">🛒</span>
           <div class="metric-info">
-            <span class="metric-val" id="agent-stat-shopify">SYNCED</span>
-            <span class="metric-title">Shopify Theme Schema</span>
+            <span class="metric-val" id="agent-stat-wp">SYNCED</span>
+            <span class="metric-title">WordPress WP-Head Schema</span>
           </div>
         </div>
       </div>
@@ -160,13 +160,13 @@
               <span class="badge" style="color: #f59e0b;">✓ Speakable Schema Injected</span>
             </div>
 
-            <div class="shopify-sync-box" style="margin-top: 1.25rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25); padding: 1rem; border-radius: 8px;">
-              <h5 style="margin-bottom: 0.35rem; color: #38bdf8;">Shopify Store Status:</h5>
+            <div class="wp-sync-box" style="margin-top: 1.25rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25); padding: 1rem; border-radius: 8px;">
+              <h5 style="margin-bottom: 0.35rem; color: #38bdf8;">WordPress Store Status:</h5>
               <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                Target: <code>www.brewyoursip.com</code> &bull; Theme: <code>brewyoursip-theme</code><br>
-                Liquid File: <code>snippets/seo-schema.liquid</code> (Rendered in <code>theme.liquid</code>)
+                Target: <code>www.brewyoursip.com</code> &bull; Platform: <code>WordPress / WooCommerce</code><br>
+                PHP Snippet: <code>wordpress-schema/brewyoursip-seo-schema.php</code> (Hooks <code>wp_head</code>)
               </p>
-              <button type="button" class="btn-small" id="btn-sync-shopify-action">Re-Sync Theme Schema</button>
+              <button type="button" class="btn-small" id="btn-sync-wp-action">Re-Sync WP Schema</button>
             </div>
           </div>
         </div>
@@ -378,7 +378,7 @@
         <!-- Rendered by app.js -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-secondary" id="btn-export-shopify-single">Export Shopify JSON</button>
+        <button type="button" class="btn-secondary" id="btn-export-wp-single">Export WordPress JSON</button>
         <button type="button" class="btn-primary" id="btn-copy-article-html">Copy Article HTML</button>
       </div>
   <!-- Modal: E-E-A-T Audit Report Modal -->

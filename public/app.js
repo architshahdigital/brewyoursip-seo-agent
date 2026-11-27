@@ -1,6 +1,6 @@
 /**
  * BREW YOUR SIP 24x7 AI AGENT - FRONTEND CONTROLLER
- * Manages 24x7 Control Room, Blog Factory (16:9), GMB Local Agent, AEO/GEO Studio, and Shopify Sync
+ * Manages 24x7 Control Room, Blog Factory (16:9), GMB Local Agent, AEO/GEO Studio, and WordPress Sync
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusEl = document.getElementById('agent-stat-status');
     const blogsEl = document.getElementById('agent-stat-blogs');
     const imagesEl = document.getElementById('agent-stat-images');
-    const shopifyEl = document.getElementById('agent-stat-shopify');
+    const wpEl = document.getElementById('agent-stat-wp');
 
     if (statusEl) statusEl.textContent = 'ACTIVE 24x7';
     if (blogsEl) blogsEl.textContent = `${data.blogs ? data.blogs.length : 3} Generated`;
     if (imagesEl) imagesEl.textContent = `${data.imagesAvailable || 3}x 16:9 HD`;
-    if (shopifyEl) shopifyEl.textContent = data.shopifyThemeSynced ? 'SYNCED (Liquid)' : 'SYNCED';
+    if (wpEl) wpEl.textContent = data.wordpressSchemaSynced ? 'SYNCED (WP PHP)' : 'SYNCED';
 
     // Terminal feed
     const terminal = document.getElementById('agent-terminal-feed');
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="display: flex; gap: 0.5rem; flex-wrap:wrap;">
             <button type="button" class="btn-primary btn-view-article" data-slug="${b.slug}">Read Article & HTML</button>
             <button type="button" class="btn-secondary btn-view-eeat" data-slug="${b.slug}" style="border:1px solid rgba(16,185,129,0.5); color:#10b981;">Inspect E-E-A-T Audit 🔍</button>
-            <button type="button" class="btn-secondary btn-export-shopify" data-slug="${b.slug}">Export Shopify JSON</button>
+            <button type="button" class="btn-secondary btn-export-wp" data-slug="${b.slug}">Export WordPress JSON</button>
           </div>
         </div>
       `;
@@ -218,21 +218,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    container.querySelectorAll('.btn-export-shopify').forEach(btn => {
+    container.querySelectorAll('.btn-export-wp').forEach(btn => {
       btn.addEventListener('click', () => {
         const slug = btn.getAttribute('data-slug');
         const article = allBlogsData.find(a => a.slug === slug);
         if (article) {
           const payload = {
-            article: {
-              title: article.title,
-              body_html: article.html,
-              tags: "tea terroir, darjeeling, assam, loose leaf tea",
-              author: "Ashok Shah"
+            title: article.title,
+            slug: article.slug,
+            status: "draft",
+            content: article.html,
+            excerpt: article.metaDescription,
+            meta: {
+              rank_math_title: article.title,
+              rank_math_description: article.metaDescription,
+              rank_math_focus_keyword: article.focusKeyword
             }
           };
-          downloadFile(JSON.stringify(payload, null, 2), `${slug}.json`, 'application/json');
-          showToast(`Exported Shopify JSON for "${article.title}"`);
+          downloadFile(JSON.stringify(payload, null, 2), `${slug}-wordpress.json`, 'application/json');
+          showToast(`Exported WordPress JSON for "${article.title}"`);
         }
       });
     });
@@ -242,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const articleModal = document.getElementById('article-modal');
   const btnCloseArticleModal = document.getElementById('btn-close-article-modal');
   const btnCopyArticleHtml = document.getElementById('btn-copy-article-html');
-  const btnExportShopifySingle = document.getElementById('btn-export-shopify-single');
+  const btnExportWpSingle = document.getElementById('btn-export-wp-single');
 
   // E-E-A-T Modal
   const eeatModal = document.getElementById('eeat-modal');
@@ -352,19 +356,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (btnExportShopifySingle) {
-    btnExportShopifySingle.addEventListener('click', () => {
+  if (btnExportWpSingle) {
+    btnExportWpSingle.addEventListener('click', () => {
       if (currentModalArticle) {
         const payload = {
-          article: {
-            title: currentModalArticle.title,
-            body_html: currentModalArticle.html,
-            tags: "tea terroir, darjeeling, assam, loose leaf tea",
-            author: "Ashok Shah"
+          title: currentModalArticle.title,
+          slug: currentModalArticle.slug,
+          status: "draft",
+          content: currentModalArticle.html,
+          excerpt: currentModalArticle.metaDescription,
+          meta: {
+            rank_math_title: currentModalArticle.title,
+            rank_math_description: currentModalArticle.metaDescription,
+            rank_math_focus_keyword: currentModalArticle.focusKeyword
           }
         };
-        downloadFile(JSON.stringify(payload, null, 2), `${currentModalArticle.slug}.json`, 'application/json');
-        showToast('Exported Shopify JSON draft!');
+        downloadFile(JSON.stringify(payload, null, 2), `${currentModalArticle.slug}-wordpress.json`, 'application/json');
+        showToast('Exported WordPress JSON draft!');
       }
     });
   }
@@ -488,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 4. ACTION BUTTONS (CYCLE RUN, CREATE BLOG, SYNC SHOPIFY)
+  // 4. ACTION BUTTONS (CYCLE RUN, CREATE BLOG, SYNC WORDPRESS)
   // ==========================================================================
   const btnRunCycle = document.getElementById('btn-run-agent-cycle');
   if (btnRunCycle) {
@@ -498,10 +506,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch('/api/agent/run-now', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ taskType: 'sync_shopify' })
+          body: JSON.stringify({ taskType: 'sync_wordpress' })
         });
         if (res.ok) {
-          showToast('Autonomous cycle complete! Shopify theme synced.');
+          showToast('Autonomous cycle complete! WordPress schema synced.');
           fetchAgentStatus();
         }
       } catch(e) {
@@ -510,23 +518,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const btnSyncShopifyTheme = document.getElementById('btn-sync-shopify-theme');
-  const btnSyncShopifyAction = document.getElementById('btn-sync-shopify-action');
+  const btnSyncWpSchema = document.getElementById('btn-sync-wp-schema');
+  const btnSyncWpAction = document.getElementById('btn-sync-wp-action');
 
-  [btnSyncShopifyTheme, btnSyncShopifyAction].forEach(btn => {
+  [btnSyncWpSchema, btnSyncWpAction].forEach(btn => {
     if (btn) {
       btn.addEventListener('click', async () => {
         try {
-          const res = await fetch('/api/shopify/sync-theme', { method: 'POST' });
+          const res = await fetch('/api/wordpress/sync-schema', { method: 'POST' });
           const data = await res.json();
-          if (data.snippetCopied || data.themeLiquidUpdated) {
-            showToast('✅ Synchronized seo-schema.liquid into brewyoursip-theme!');
+          if (data.schemaGenerated) {
+            showToast('✅ Generated WordPress wp_head JSON-LD snippet (brewyoursip-seo-schema.php)!');
             fetchAgentStatus();
           } else {
-            showToast('Theme already up to date.');
+            showToast('WordPress schema already up to date.');
           }
         } catch(e) {
-          showToast('Shopify theme synchronized.');
+          showToast('WordPress schema synchronized.');
         }
       });
     }

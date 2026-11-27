@@ -11,7 +11,7 @@ const { BRAND_ENTITY, generateGeoPrompts } = require('./aeo-geo-engine');
 const { GMB_POST_SCHEDULE, generateNextGmbPost } = require('./gmb-local-agent');
 const { BLOG_EDITORIAL_CALENDAR, generateFullBlogArticle } = require('./blog-writer');
 const { getImageCatalog } = require('./image-service');
-const { syncThemeSeoSchema, exportShopifyDraft } = require('./shopify-connector');
+const { syncWordPressSchema, exportWordPressDraft } = require('./wordpress-connector');
 
 const STATE_FILE = path.join(__dirname, 'agent-state.json');
 
@@ -34,7 +34,7 @@ function loadState() {
     totalAuditsRun: 1,
     totalBlogsCreated: 3,
     totalGmbPostsQueued: 3,
-    shopifyThemeSynced: false,
+    wordpressSchemaSynced: false,
     logs: [
       { timestamp: new Date().toISOString(), message: "Agent initialized in 24x7 autonomous mode for brewyoursip.com", type: "system" },
       { timestamp: new Date().toISOString(), message: "Generated 3x 16:9 Gemini visual assets for Darjeeling, Assam, and Brewing masterclasses", type: "gemini" },
@@ -68,18 +68,18 @@ function logActivity(message, type = "info") {
 async function performAutonomousCycle() {
   logActivity("Starting scheduled 24x7 autonomous optimization cycle...", "cron");
 
-  // 1. Sync theme schema
-  const syncResult = syncThemeSeoSchema();
-  if (syncResult.snippetCopied || syncResult.themeLiquidUpdated) {
-    logActivity("Shopify theme: Synchronized seo-schema.liquid and updated theme.liquid with Speakable AEO tags", "shopify");
+  // 1. Sync WordPress schema snippet
+  const syncResult = syncWordPressSchema();
+  if (syncResult.schemaGenerated) {
+    logActivity("WordPress Schema: Generated wp_head JSON-LD snippet (brewyoursip-seo-schema.php)", "wordpress");
   }
 
-  // 2. Export ready drafts for Shopify
+  // 2. Export ready drafts for WordPress
   const state = loadState();
   state.blogs.forEach(b => {
-    exportShopifyDraft(b);
+    exportWordPressDraft(b);
   });
-  logActivity(`Exported ${state.blogs.length} SEO/AEO/GEO blog drafts into shopify-drafts/`, "blog");
+  logActivity(`Exported ${state.blogs.length} SEO/AEO/GEO blog drafts into wordpress-drafts/`, "blog");
 
   // 3. Health check
   try {
@@ -97,10 +97,10 @@ async function performAutonomousCycle() {
 function triggerTask(taskType, payload = {}) {
   const state = loadState();
 
-  if (taskType === "sync_shopify") {
-    const res = syncThemeSeoSchema();
-    state.shopifyThemeSynced = true;
-    logActivity("Manually synced Shopify theme snippets and rendered seo-schema.liquid", "shopify");
+  if (taskType === "sync_wordpress" || taskType === "sync_shopify") {
+    const res = syncWordPressSchema();
+    state.wordpressSchemaSynced = true;
+    logActivity("Manually generated WordPress wp_head JSON-LD snippet (brewyoursip-seo-schema.php)", "wordpress");
     saveState(state);
     return { success: true, details: res };
   }
@@ -123,7 +123,7 @@ function triggerTask(taskType, payload = {}) {
     const newBlog = generateFullBlogArticle(customMeta);
     state.blogs.unshift(newBlog);
     state.totalBlogsCreated = state.blogs.length;
-    exportShopifyDraft(newBlog);
+    exportWordPressDraft(newBlog);
     logActivity(`Autonomous Blog Factory created: "${newBlog.title}" with AEO quick answer box and 16:9 image`, "blog");
     saveState(state);
     return { success: true, blog: newBlog };

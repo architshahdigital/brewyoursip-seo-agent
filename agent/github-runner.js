@@ -9,7 +9,7 @@ const axios = require('axios');
 const { loadState, saveState, logActivity } = require('./agent-worker');
 const { BLOG_EDITORIAL_CALENDAR, generateFullBlogArticle } = require('./blog-writer');
 const { GMB_POST_SCHEDULE, generateNextGmbPost } = require('./gmb-local-agent');
-const { exportShopifyDraft } = require('./shopify-connector');
+const { exportWordPressDraft, publishToWordPress, syncWordPressSchema } = require('./wordpress-connector');
 
 // Parse task flag
 const args = process.argv.slice(2);
@@ -54,13 +54,22 @@ async function runGithubAction() {
     const template = BLOG_EDITORIAL_CALENDAR[blogIndex];
     const newBlog = generateFullBlogArticle(template);
 
-    // Save draft
-    const draftPath = exportShopifyDraft(newBlog);
+    // Save WordPress draft & optionally publish via WP REST API
+    syncWordPressSchema();
+    const draftPath = exportWordPressDraft(newBlog);
+    const wpResult = await publishToWordPress(newBlog);
     console.log(`   ✅ Article Generated: "${newBlog.title}"`);
     console.log(`   🏆 Google E-E-A-T Score: ${newBlog.eeatAudit ? newBlog.eeatAudit.score : 100}/100 (ISO 3103 Cupping Verified)`);
     console.log(`   ✅ AEO Answer Box & Speakable Schema Included`);
     console.log(`   ✅ 16:9 Image Prompt Configured: "${newBlog.heroImagePrompt.substring(0, 70)}..."`);
-    console.log(`   ✅ Draft exported to: ${draftPath}`);
+    console.log(`   ✅ WordPress Draft exported to: ${draftPath}`);
+    if (wpResult.published) {
+      console.log(`   🚀 Published to WordPress! Post ID: ${wpResult.postId} (${wpResult.status}) -> ${wpResult.link}`);
+    } else if (wpResult.skipped) {
+      console.log(`   ℹ️ WordPress REST API skipped: ${wpResult.reason}`);
+    } else {
+      console.log(`   ⚠️ WordPress REST API error: ${wpResult.error}`);
+    }
 
     stepSummary += `### 📰 2. Autonomous E-E-A-T Blog Factory (16:9 Gemini Ready)\n`;
     stepSummary += `- **Headline**: **${newBlog.title}**\n`;

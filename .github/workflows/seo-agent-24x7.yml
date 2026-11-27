@@ -53,6 +53,11 @@ jobs:
         run: npm ci || npm install
 
       - name: 🤖 Execute Autonomous 24x7 SEO/AEO/GEO Engine
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_POST_STATUS: ${{ secrets.WP_POST_STATUS }}
         run: |
           TASK_NAME="${{ github.event.inputs.task || 'daily_cycle' }}"
           node agent/github-runner.js --task="$TASK_NAME"
@@ -61,7 +66,7 @@ jobs:
         run: |
           git config --global user.name "BrewYourSip-SEO-Agent[bot]"
           git config --global user.email "agent@brewyoursip.com"
-          git add agent/agent-state.json shopify-drafts/
+          git add agent/agent-state.json wordpress-drafts/ wordpress-schema/
           if git diff --staged --quiet; then
             echo "No new changes to commit."
           else

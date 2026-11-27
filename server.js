@@ -11,7 +11,7 @@ const { BRAND_ENTITY, generateAeoQuickAnswer, generateGeoPrompts } = require('./
 const { GMB_POST_SCHEDULE, LOCAL_QA_TEMPLATES, generateNextGmbPost } = require('./agent/gmb-local-agent');
 const { BLOG_EDITORIAL_CALENDAR, generateFullBlogArticle } = require('./agent/blog-writer');
 const { getImageCatalog } = require('./agent/image-service');
-const { syncThemeSeoSchema, exportShopifyDraft } = require('./agent/shopify-connector');
+const { syncWordPressSchema, exportWordPressDraft, publishToWordPress } = require('./agent/wordpress-connector');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -339,7 +339,7 @@ app.get('/api/agent/status', (req, res) => {
 
 // Trigger Agent Action Immediately
 app.post('/api/agent/run-now', (req, res) => {
-  const { taskType = "sync_shopify", payload = {} } = req.body;
+  const { taskType = "sync_wordpress", payload = {} } = req.body;
   const result = triggerTask(taskType, payload);
   return res.json(result);
 });
@@ -386,11 +386,24 @@ app.get('/api/agent/images', (req, res) => {
   return res.json(getImageCatalog());
 });
 
-// Direct Shopify Theme Sync
-app.post('/api/shopify/sync-theme', (req, res) => {
-  const syncResult = syncThemeSeoSchema();
-  logActivity("Manual trigger: Synchronized seo-schema.liquid into Shopify theme", "shopify");
+// WordPress Schema Sync
+app.post('/api/wordpress/sync-schema', (req, res) => {
+  const syncResult = syncWordPressSchema();
+  logActivity("Manual trigger: Generated WordPress wp_head JSON-LD snippet (brewyoursip-seo-schema.php)", "wordpress");
   return res.json(syncResult);
+});
+
+// Direct WordPress REST API Publish
+app.post('/api/wordpress/publish', async (req, res) => {
+  const { slug } = req.body;
+  const state = loadState();
+  const article = (state.blogs || []).find(b => b.slug === slug);
+  if (!article) return res.status(404).json({ error: 'Article not found' });
+  const wpResult = await publishToWordPress(article);
+  if (wpResult.published) {
+    logActivity(`Published "${article.title}" to WordPress (ID: ${wpResult.postId})`, "wordpress");
+  }
+  return res.json(wpResult);
 });
 
 app.listen(PORT, () => {
