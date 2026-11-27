@@ -141,17 +141,21 @@ function triggerTask(taskType, payload = {}) {
   return { error: "Unknown task type" };
 }
 
-// Initial cycle on startup
-loadState();
-performAutonomousCycle();
+let daemonInterval = null;
 
-// Background Interval: runs every 6 hours (21,600,000 ms)
-setInterval(performAutonomousCycle, 6 * 60 * 60 * 1000);
+function startDaemon() {
+  if (daemonInterval) return;
+  loadState();
+  performAutonomousCycle();
+  // Background Interval: runs every 6 hours (21,600,000 ms)
+  daemonInterval = setInterval(performAutonomousCycle, 6 * 60 * 60 * 1000);
+}
 
 module.exports = {
   loadState,
   saveState,
   logActivity,
   performAutonomousCycle,
-  triggerTask
+  triggerTask,
+  startDaemon
 };

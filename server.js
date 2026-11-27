@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Agent Modules
-const { loadState, saveState, logActivity, triggerTask, performAutonomousCycle } = require('./agent/agent-worker');
+const { loadState, saveState, logActivity, triggerTask, performAutonomousCycle, startDaemon } = require('./agent/agent-worker');
 const { BRAND_ENTITY, generateAeoQuickAnswer, generateGeoPrompts } = require('./agent/aeo-geo-engine');
 const { GMB_POST_SCHEDULE, LOCAL_QA_TEMPLATES, generateNextGmbPost } = require('./agent/gmb-local-agent');
 const { BLOG_EDITORIAL_CALENDAR, generateFullBlogArticle } = require('./agent/blog-writer');
@@ -394,6 +394,7 @@ app.post('/api/shopify/sync-theme', (req, res) => {
 });
 
 app.listen(PORT, () => {
+  startDaemon();
   console.log(`====================================================`);
   console.log(`🤖 24x7 AUTONOMOUS SEO / AEO / GEO AGENT RUNNING!`);
   console.log(`🌐 Dashboard: http://localhost:${PORT}`);

@@ -61,10 +61,11 @@ jobs:
         run: |
           git config --global user.name "BrewYourSip-SEO-Agent[bot]"
           git config --global user.email "agent@brewyoursip.com"
-          git add agent/agent-state.json shopify-drafts/ public/data/
+          git add agent/agent-state.json shopify-drafts/
           if git diff --staged --quiet; then
             echo "No new changes to commit."
           else
             git commit -m "🤖 [24x7 Agent] Automated SEO/AEO/GEO & GMB Update [skip ci]"
+            git pull --rebase origin main || true
             git push origin main
           fi

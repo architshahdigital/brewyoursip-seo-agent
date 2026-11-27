@@ -108,7 +108,11 @@ async function runGithubAction() {
   console.log(`================================================================\n`);
 }
 
-runGithubAction().catch(err => {
-  console.error('GitHub Action runner failed:', err);
-  process.exit(1);
-});
+runGithubAction()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error('GitHub Action runner failed:', err);
+    process.exit(1);
+  });
