@@ -46,8 +46,8 @@ async function getServiceAccountToken(serviceAccountJsonStr, scope) {
 
 // Fetch real search analytics & sitemap status from Google Search Console
 async function fetchGscInsights(siteUrlOverride = null) {
-  const saJson = process.env.GSC_SERVICE_ACCOUNT_JSON;
-  const siteUrl = siteUrlOverride || process.env.GSC_SITE_URL || 'https://www.brewyoursip.com/';
+  const saJson = (process.env.GSC_SERVICE_ACCOUNT_JSON || '').trim();
+  const primarySiteUrl = (siteUrlOverride || process.env.GSC_SITE_URL || 'https://www.brewyoursip.com/').trim();
 
   if (!saJson) {
     return {
@@ -67,20 +67,45 @@ async function fetchGscInsights(siteUrlOverride = null) {
     const startDate = new Date(Date.now() - 28 * 24 * 60 * 60 * 1000);
     const fmt = d => d.toISOString().split('T')[0];
 
-    const encodedSite = encodeURIComponent(siteUrl);
-    const analyticsRes = await axios.post(
-      `https://www.googleapis.com/webmasters/v3/sites/${encodedSite}/searchAnalytics/query`,
-      {
-        startDate: fmt(startDate),
-        endDate: fmt(endDate),
-        dimensions: ['query'],
-        rowLimit: 15
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        timeout: 15000
+    const candidates = Array.from(new Set([
+      primarySiteUrl,
+      'https://www.brewyoursip.com/',
+      'sc-domain:brewyoursip.com',
+      'https://brewyoursip.com/'
+    ].filter(Boolean)));
+
+    let siteUrl = primarySiteUrl;
+    let analyticsRes = null;
+    let lastErr = null;
+
+    for (const candidate of candidates) {
+      const encodedSite = encodeURIComponent(candidate);
+      try {
+        analyticsRes = await axios.post(
+          `https://www.googleapis.com/webmasters/v3/sites/${encodedSite}/searchAnalytics/query`,
+          {
+            startDate: fmt(startDate),
+            endDate: fmt(endDate),
+            dimensions: ['query'],
+            rowLimit: 15
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            timeout: 15000
+          }
+        );
+        siteUrl = candidate;
+        break;
+      } catch (e) {
+        lastErr = e;
       }
-    );
+    }
+
+    if (!analyticsRes) {
+      throw lastErr;
+    }
+
+    const encodedSite = encodeURIComponent(siteUrl);
 
     let sitemaps = [];
     try {
