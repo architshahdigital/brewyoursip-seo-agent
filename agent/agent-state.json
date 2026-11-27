@@ -5,12 +5,32 @@
   "brand": "Brew Your Sip",
   "heritage": "Unik Tea Centre (Est. 1988, Kolkata)",
   "startedAt": "2026-09-22T08:44:40.872Z",
-  "lastRunAt": "2026-11-27T19:47:57.101Z",
+  "lastRunAt": "2026-11-27T19:49:08.641Z",
   "totalAuditsRun": 1,
   "totalBlogsCreated": 3,
   "totalGmbPostsQueued": 3,
   "shopifyThemeSynced": false,
   "logs": [
+    {
+      "timestamp": "2026-11-27T19:49:08.640Z",
+      "message": "GitHub Actions: Synced 15 GSC queries",
+      "type": "health"
+    },
+    {
+      "timestamp": "2026-11-27T19:49:07.739Z",
+      "message": "GitHub Actions: Processed GMB post \"Fresh 2026 Darjeeling First Flush Is Here! 🌸🍃\"",
+      "type": "local"
+    },
+    {
+      "timestamp": "2026-11-27T19:49:07.737Z",
+      "message": "GitHub Actions: Created blog \"Darjeeling First Flush: The Definitive 2026 Guide to Himalayan Terroir and Spring Harvest\" [E-E-A-T: 100/100]",
+      "type": "blog"
+    },
+    {
+      "timestamp": "2026-11-27T19:49:02.138Z",
+      "message": "GitHub Actions: Verified site health (HTTP 200)",
+      "type": "health"
+    },
     {
       "timestamp": "2026-11-27T19:47:57.100Z",
       "message": "GitHub Actions GSC Error: User does not have sufficient permission for site 'https://www.brewyoursip.com/ '. See also: https://support.google.com/webmasters/answer/2451999.",
@@ -414,9 +434,135 @@
     }
   ],
   "gscLastStatus": {
-    "connected": false,
-    "skipped": false,
-    "reason": "User does not have sufficient permission for site 'https://www.brewyoursip.com/ '. See also: https://support.google.com/webmasters/answer/2451999.",
-    "checkedAt": "2026-11-27T19:47:57.099Z"
+    "connected": true,
+    "siteUrl": "sc-domain:brewyoursip.com",
+    "queryCount": 15,
+    "checkedAt": "2026-11-27T19:49:08.638Z"
+  },
+  "gscInsights": {
+    "connected": true,
+    "siteUrl": "sc-domain:brewyoursip.com",
+    "period": "2026-10-30 to 2026-11-27",
+    "topQueries": [
+      {
+        "query": "most tea consuming state in india",
+        "clicks": 2,
+        "impressions": 24,
+        "ctr": 8.33,
+        "position": 1.6
+      },
+      {
+        "query": "bharat me sabse jyada chai pine wala rajya",
+        "clicks": 1,
+        "impressions": 24,
+        "ctr": 4.17,
+        "position": 3.2
+      },
+      {
+        "query": "bharat mein sabse jyaada chai peene wala rajya",
+        "clicks": 1,
+        "impressions": 22,
+        "ctr": 4.55,
+        "position": 3.4
+      },
+      {
+        "query": "difference between darjeeling and assam tea",
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 33.33,
+        "position": 16.3
+      },
+      {
+        "query": "highest tea consuming state in india",
+        "clicks": 1,
+        "impressions": 11,
+        "ctr": 9.09,
+        "position": 1.1
+      },
+      {
+        "query": "india ?",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 100,
+        "position": 8
+      },
+      {
+        "query": "india me sabse jyada chai pine wala state",
+        "clicks": 1,
+        "impressions": 17,
+        "ctr": 5.88,
+        "position": 2.4
+      },
+      {
+        "query": "is green tea and jasmine tea the same",
+        "clicks": 1,
+        "impressions": 13,
+        "ctr": 7.69,
+        "position": 8.9
+      },
+      {
+        "query": "jasmine tea caffeine vs green tea",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 50,
+        "position": 2.5
+      },
+      {
+        "query": "most tea drinking state in india",
+        "clicks": 1,
+        "impressions": 21,
+        "ctr": 4.76,
+        "position": 1.3
+      },
+      {
+        "query": "pearl green tea",
+        "clicks": 1,
+        "impressions": 23,
+        "ctr": 4.35,
+        "position": 2
+      },
+      {
+        "query": "which state drink more tea in india",
+        "clicks": 1,
+        "impressions": 15,
+        "ctr": 6.67,
+        "position": 1.3
+      },
+      {
+        "query": "$6.50 in indian rupees",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7
+      },
+      {
+        "query": "100 g এর দাম কত?",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1
+      },
+      {
+        "query": "2nd",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      }
+    ],
+    "sitemaps": [
+      {
+        "path": "https://brewyoursip.com/sitemap_index.xml",
+        "lastSubmitted": "2026-11-19T17:12:38.381Z",
+        "errors": "0",
+        "warnings": "0"
+      },
+      {
+        "path": "https://brewyoursip.com/sitemap.xml",
+        "lastSubmitted": "2026-06-21T14:25:38.193Z",
+        "errors": "0",
+        "warnings": "0"
+      }
+    ]
   }
 }
