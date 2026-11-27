@@ -110,45 +110,40 @@ function auditEeatScore(articleHtml, meta) {
 function buildArticleHtml(meta) {
   const aeo = generateAeoQuickAnswer(meta.slug, meta.focusKeyword);
 
-  // Helper E-E-A-T Header Banner
+  // Helper Editorial Verification Banner (WordPress Light/Cream Theme Native)
   const eeatBanner = `
-    <!-- E-E-A-T Editorial Verification Banner -->
-    <div class="eeat-editorial-banner" style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:1rem 1.35rem; margin:1rem 0 1.75rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.75rem; font-size:0.85rem;">
-      <div style="display:flex; align-items:center; gap:0.65rem;">
-        <span style="font-size:1.6rem;">🍵</span>
-        <div>
-          <span style="color:var(--text-muted); display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em;">Author & Master Taster:</span>
-          <strong itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <span itemprop="name">Ashok Shah</span> (<span itemprop="jobTitle">Founder & Chief Tea Taster</span>)
-          </strong>
-        </div>
+    <div class="eeat-editorial-banner" style="background:#f4efe6; border:1px solid #d6cfc2; border-radius:10px; padding:1rem 1.35rem; margin:0 0 1.5rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.75rem; font-size:0.88rem; color:#2c3e35;">
+      <div>
+        <span style="color:#5c6f63; display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;">Author &amp; Master Taster</span>
+        <strong itemprop="author" itemscope itemtype="https://schema.org/Person" style="color:#1b4332;">
+          <span itemprop="name">Ashok Shah</span> (<span itemprop="jobTitle">Founder &amp; Chief Tea Taster</span>)
+        </strong>
       </div>
-      <div style="font-size:0.82rem; color:var(--text-secondary);">
-        <span>Heritage: <strong>Unik Tea Centre (Est. 1988, Kolkata)</strong></span> &bull; 
+      <div style="font-size:0.84rem; color:#4a5d52;">
+        <span>Heritage: <strong style="color:#1b4332;">Unik Tea Centre (Est. 1988, Kolkata)</strong></span> &bull; 
         <span>35+ Years Tea Auction Expertise</span>
       </div>
-      <div style="font-size:0.8rem; color:#10b981; font-weight:600; display:flex; align-items:center; gap:0.35rem;">
-        <span>✓</span> <span>Fact-Checked & ISO 3103 Cupping Lab Verified</span>
+      <div style="font-size:0.82rem; color:#1b4332; font-weight:600;">
+        &#10003; ISO 3103 Cupping Lab Verified
       </div>
     </div>
   `;
 
   // Helper Author Bio Card
   const authorBioCard = `
-    <!-- Author Bio Card (E-E-A-T Mandatory) -->
-    <footer class="blog-author-card" style="margin-top:3.5rem; padding:1.75rem; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:12px; display:flex; gap:1.25rem; align-items:center;">
-      <div style="font-size:3rem; background:linear-gradient(135deg, #10b981, #0284c7); width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 4px 14px rgba(16,185,129,0.3);">
-        👨‍💼
+    <footer class="blog-author-card" style="margin-top:3rem; padding:1.75rem; background:#f4efe6; border:1px solid #d6cfc2; border-radius:12px; display:flex; flex-wrap:wrap; gap:1.25rem; align-items:center;">
+      <div style="font-size:1.35rem; font-weight:700; letter-spacing:0.05em; background:#1b4332; color:#f6f3ec; width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        AS
       </div>
-      <div>
-        <h4 style="margin:0 0 0.25rem; font-size:1.15rem; color:var(--text-primary);">About the Author: Ashok Shah</h4>
-        <span style="font-size:0.8rem; color:#38bdf8; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Founder & Master Tea Taster &bull; Unik Tea Centre & Brew Your Sip</span>
-        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin:0.5rem 0 0.75rem;">
+      <div style="flex:1; min-width:240px;">
+        <h4 style="margin:0 0 0.25rem; font-size:1.15rem; color:#1b4332;">About the Author: Ashok Shah</h4>
+        <span style="font-size:0.8rem; color:#8c6239; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Founder &amp; Master Tea Taster &bull; Unik Tea Centre &amp; Brew Your Sip</span>
+        <p style="font-size:0.9rem; color:#3d5245; line-height:1.6; margin:0.5rem 0 0.75rem;">
           Ashok Shah has evaluated, cupped, and traded over 100,000 tea lots across the Kolkata, Siliguri, and Guwahati tea auctions since 1988. Passionate about single-estate terroir preservation, he works directly with heritage planters across Darjeeling, Assam, and the Nilgiris to ensure authentic, unadulterated loose leaf tea reaches tea lovers across the world.
         </p>
-        <div style="font-size:0.8rem; color:var(--text-muted);">
+        <div style="font-size:0.84rem; color:#5c6f63;">
           <span>Verified Kolkata Tea Merchant</span> &bull; 
-          <a href="https://www.brewyoursip.com/pages/about-us" style="color:#38bdf8; text-decoration:none; font-weight:500;">Read Our 35-Year Heritage Story &rarr;</a>
+          <a href="https://www.brewyoursip.com/pages/about-us" style="color:#1b4332; text-decoration:underline; font-weight:600;">Read Our 35-Year Heritage Story &rarr;</a>
         </div>
       </div>
     </footer>
@@ -159,13 +154,9 @@ function buildArticleHtml(meta) {
     return `
 <article class="artisan-blog-post" itemscope itemtype="https://schema.org/BlogPosting">
   <header class="blog-header">
-    <div class="blog-meta-tags">
-      <span class="blog-category">${meta.category}</span>
-      <span class="eeat-verified-tag" style="background:rgba(16,185,129,0.15); color:#10b981; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; margin-left:0.5rem;">✓ E-E-A-T Verified &bull; First-Hand Cupping</span>
-    </div>
-    <h1 itemprop="headline">${meta.title}</h1>
+    <meta itemprop="headline" content="${meta.title}" />
     ${eeatBanner}
-    <div class="blog-byline" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">
+    <div class="blog-byline" style="font-size:0.85rem; color:#5c6f63; margin-bottom:1.5rem;">
       <time datetime="${new Date().toISOString()}" itemprop="datePublished">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time> &bull; 
       <span>${meta.readTimeMinutes} Min Read</span> &bull; 
       <span>Single-Estate Himalayan Harvest: Spring 2026</span>
@@ -174,20 +165,20 @@ function buildArticleHtml(meta) {
 
   <!-- 16:9 Hero Image Container -->
   <div class="blog-hero-image-wrap" style="margin-bottom:2rem;">
-    <img src="/images/generated/${meta.heroImageName}.jpg" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" />
-    <span class="image-caption" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; text-align:center;">
+    <img src="${meta.heroImageUrl || `/images/generated/${meta.heroImageName}.jpg`}" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; display:block; box-shadow:0 8px 24px rgba(27,67,50,0.12);" />
+    <span class="image-caption" style="display:block; font-size:0.75rem; color:#5c6f63; margin-top:0.4rem; text-align:center;">
       Photo: ${meta.imageAlt} &bull; Sourced directly by Brew Your Sip Tea Merchants.
     </span>
   </div>
 
   <!-- AEO Quick Answer Box -->
-  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:rgba(56,189,248,0.08); border-left:4px solid #38bdf8; padding:1.35rem; border-radius:8px; margin:2rem 0;">
-    <h3 style="margin-top:0; color:#38bdf8; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
-    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:var(--text-primary);" itemprop="description">
+  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:#f2f5f3; border-left:4px solid #1b4332; padding:1.35rem; border-radius:8px; margin:2rem 0;">
+    <h3 style="margin-top:0; color:#1b4332; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
+    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:#1b4332;" itemprop="description">
       ${aeo.directAnswer}
     </p>
     <div class="aeo-stats-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:0.75rem; margin-top:1.2rem;">
-      ${aeo.stats.map(s => `<div style="background:rgba(255,255,255,0.05); padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:var(--text-muted); display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#38bdf8;">${s.value}</strong></div>`).join('')}
+      ${aeo.stats.map(s => `<div style="background:#ffffff; border:1px solid #d6cfc2; padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:#5c6f63; display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#1b4332;">${s.value}</strong></div>`).join('')}
     </div>
   </div>
 
@@ -204,12 +195,12 @@ function buildArticleHtml(meta) {
     </p>
 
     <!-- First-Hand Cupping Notes (Experience + Expertise) -->
-    <div class="cupping-notes-box" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1.25rem; margin:2rem 0;">
-      <h3 style="margin-top:0; color:#10b981; font-size:1.1rem;">🧪 Master Taster's Sensory Cupping Protocol (ISO 3103 Standard)</h3>
-      <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+    <div class="cupping-notes-box" style="background:#f9f7f2; border:1px solid #d6cfc2; border-radius:8px; padding:1.25rem; margin:2rem 0;">
+      <h3 style="margin-top:0; color:#1b4332; font-size:1.1rem;">🧪 Master Taster's Sensory Cupping Protocol (ISO 3103 Standard)</h3>
+      <p style="font-size:0.95rem; color:#3d5245; margin-bottom:0.75rem;">
         Conducted at Unik Tea Centre Cupping Laboratory, Kolkata. Tested with 2.83g of whole leaf in 140ml boiling water at exactly 5 minutes in porcelain tasting bowls:
       </p>
-      <ul style="padding-left:1.5rem; font-size:0.92rem; color:var(--text-secondary); line-height:1.7;">
+      <ul style="padding-left:1.5rem; font-size:0.92rem; color:#3d5245; line-height:1.7;">
         <li><strong>Dry Leaf:</strong> Crisp, needle-like whole leaves exhibiting shades of olive green, forest green, and silver-tipped buds with a brisk floral perfume.</li>
         <li><strong>Wet Infused Leaf:</strong> Bright luminescent emerald green with intense aromas of wet mountain pine, honeysuckle, and fresh green apple peel.</li>
         <li><strong>Liquor Hue:</strong> Pale champagne amber with high clarity and a shimmering reflective meniscus.</li>
@@ -222,37 +213,37 @@ function buildArticleHtml(meta) {
     <div class="table-responsive" style="margin:1.5rem 0;">
       <table class="data-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
         <thead>
-          <tr style="background:rgba(255,255,255,0.05);">
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Parameter</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Spring First Flush (Feb–Apr)</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Summer Second Flush (May–Jun)</th>
+          <tr style="background:#ebe5d8; color:#1b4332;">
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Parameter</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Spring First Flush (Feb–Apr)</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Summer Second Flush (May–Jun)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Oxidation Degree</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Light (20% – 40%)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Full / Mature (70% – 90%)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Oxidation Degree</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Light (20% – 40%)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Full / Mature (70% – 90%)</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Liquor Characteristic</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Pale Amber, Champagne Gold</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Deep Amber, Bright Copper</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Liquor Characteristic</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Pale Amber, Champagne Gold</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Deep Amber, Bright Copper</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Flavor Profile</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Orchid, Peach, Muscatel, Spring Grass</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Ripe Muscat Grape, Dark Honey, Raisin</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Flavor Profile</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Orchid, Peach, Muscatel, Spring Grass</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Ripe Muscat Grape, Dark Honey, Raisin</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Caffeine & L-Theanine</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Highest natural L-Theanine content</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Balanced Caffeine with bold body</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Caffeine & L-Theanine</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Highest natural L-Theanine content</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Balanced Caffeine with bold body</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Serving Recommendation</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Strictly pure, zero milk or sweeteners</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Pure, or drop of raw mountain honey</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Serving Recommendation</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Strictly pure, zero milk or sweeteners</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Pure, or drop of raw mountain honey</td>
           </tr>
         </tbody>
       </table>
@@ -290,18 +281,18 @@ function buildArticleHtml(meta) {
   ${authorBioCard}
 
   <!-- FAQ Section for FAQPage Schema & Search Rich Snippets -->
-  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1);">
+  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid #d6cfc2;">
     <h2>Frequently Asked Questions (FAQ)</h2>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Why is Darjeeling tea called the Champagne of Teas?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Why is Darjeeling tea called the Champagne of Teas?</h3>
       <p>Darjeeling tea earned this global accolade due to its exclusive Geographical Indication (GI) status, rare high-altitude Himalayan microclimate, and the signature unreplicable 'muscatel' grape and floral fragrance.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Can I brew Darjeeling First Flush leaves multiple times?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Can I brew Darjeeling First Flush leaves multiple times?</h3>
       <p>Yes. High-grade SFTGFOP1 whole leaves can be steeped 2 to 3 times. Extend the steeping time by 45 seconds for each subsequent infusion to extract the deeper sweet floral notes.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Where can I buy certified 2026 First Flush tea online in India?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Where can I buy certified 2026 First Flush tea online in India?</h3>
       <p>You can purchase authentic single-estate First Flush directly from <a href="https://www.brewyoursip.com/collections/darjeeling-tea">Brew Your Sip</a>, backed by Unik Tea Centre's 35-year auction lineage with express doorstep delivery across Kolkata and all Indian cities.</p>
     </div>
   </section>
@@ -314,13 +305,9 @@ function buildArticleHtml(meta) {
     return `
 <article class="artisan-blog-post" itemscope itemtype="https://schema.org/BlogPosting">
   <header class="blog-header">
-    <div class="blog-meta-tags">
-      <span class="blog-category">${meta.category}</span>
-      <span class="eeat-verified-tag" style="background:rgba(16,185,129,0.15); color:#10b981; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; margin-left:0.5rem;">✓ E-E-A-T Verified &bull; First-Hand Cupping</span>
-    </div>
-    <h1 itemprop="headline">${meta.title}</h1>
+    <meta itemprop="headline" content="${meta.title}" />
     ${eeatBanner}
-    <div class="blog-byline" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">
+    <div class="blog-byline" style="font-size:0.85rem; color:#5c6f63; margin-bottom:1.5rem;">
       <time datetime="${new Date().toISOString()}" itemprop="datePublished">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time> &bull; 
       <span>${meta.readTimeMinutes} Min Read</span> &bull; 
       <span>Upper Brahmaputra Single-Estate Harvest</span>
@@ -329,20 +316,20 @@ function buildArticleHtml(meta) {
 
   <!-- 16:9 Hero Image Container -->
   <div class="blog-hero-image-wrap" style="margin-bottom:2rem;">
-    <img src="/images/generated/${meta.heroImageName}.jpg" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" />
-    <span class="image-caption" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; text-align:center;">
+    <img src="${meta.heroImageUrl || `/images/generated/${meta.heroImageName}.jpg`}" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; display:block; box-shadow:0 8px 24px rgba(27,67,50,0.12);" />
+    <span class="image-caption" style="display:block; font-size:0.75rem; color:#5c6f63; margin-top:0.4rem; text-align:center;">
       Photo: ${meta.imageAlt} &bull; Sourced directly by Brew Your Sip Tea Merchants.
     </span>
   </div>
 
   <!-- AEO Quick Answer Box -->
-  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:rgba(56,189,248,0.08); border-left:4px solid #38bdf8; padding:1.35rem; border-radius:8px; margin:2rem 0;">
-    <h3 style="margin-top:0; color:#38bdf8; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
-    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:var(--text-primary);" itemprop="description">
+  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:#f2f5f3; border-left:4px solid #1b4332; padding:1.35rem; border-radius:8px; margin:2rem 0;">
+    <h3 style="margin-top:0; color:#1b4332; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
+    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:#1b4332;" itemprop="description">
       ${aeo.directAnswer}
     </p>
     <div class="aeo-stats-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:0.75rem; margin-top:1.2rem;">
-      ${aeo.stats.map(s => `<div style="background:rgba(255,255,255,0.05); padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:var(--text-muted); display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#38bdf8;">${s.value}</strong></div>`).join('')}
+      ${aeo.stats.map(s => `<div style="background:#ffffff; border:1px solid #d6cfc2; padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:#5c6f63; display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#1b4332;">${s.value}</strong></div>`).join('')}
     </div>
   </div>
 
@@ -359,12 +346,12 @@ function buildArticleHtml(meta) {
     </p>
 
     <!-- Master Cupping Notes: Orthodox vs CTC -->
-    <div class="cupping-notes-box" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1.25rem; margin:2rem 0;">
-      <h3 style="margin-top:0; color:#10b981; font-size:1.1rem;">🧪 Side-by-Side ISO 3103 Cupping Lab Evaluation</h3>
-      <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+    <div class="cupping-notes-box" style="background:#f9f7f2; border:1px solid #d6cfc2; border-radius:8px; padding:1.25rem; margin:2rem 0;">
+      <h3 style="margin-top:0; color:#1b4332; font-size:1.1rem;">🧪 Side-by-Side ISO 3103 Cupping Lab Evaluation</h3>
+      <p style="font-size:0.95rem; color:#3d5245; margin-bottom:0.75rem;">
         Conducted at Unik Tea Centre Cupping Laboratory, Kolkata using calibrated 2.83g portions in 140ml boiling water (100°C) for 5 minutes:
       </p>
-      <ul style="padding-left:1.5rem; font-size:0.92rem; color:var(--text-secondary); line-height:1.7;">
+      <ul style="padding-left:1.5rem; font-size:0.92rem; color:#3d5245; line-height:1.7;">
         <li><strong>Assam Orthodox Whole Leaf:</strong> Glistening jet-black wiry leaves with dense golden trichomes (tips). Infused liquor is a brilliant luminous ruby-copper. Nose of wild honey, malt, and dried dark figs. Palate is remarkably smooth, velvety, and naturally sweet with zero harsh throat-burn even without milk.</li>
         <li><strong>Commercial CTC Granules:</strong> Small, dark brown spherical pellets. Infused liquor is a heavy, opaque dark reddish-black. Nose is flat and pungent with dominant astringent tannins. Palate is intensely bitter and one-dimensional, practically requiring heavy dairy milk and sugar to mask the sharp tannins.</li>
       </ul>
@@ -375,37 +362,37 @@ function buildArticleHtml(meta) {
     <div class="table-responsive" style="margin:1.5rem 0;">
       <table class="data-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
         <thead>
-          <tr style="background:rgba(255,255,255,0.05);">
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Dimension</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Assam Orthodox Whole Leaf</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Commercial Machine CTC</th>
+          <tr style="background:#ebe5d8; color:#1b4332;">
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Dimension</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Assam Orthodox Whole Leaf</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Commercial Machine CTC</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Manufacturing Method</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Traditional rolling tables gently twist the whole leaf without rupture</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Contra-rotating cylindrical rollers crush, tear, and curl leaves into pellets</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Manufacturing Method</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Traditional rolling tables gently twist the whole leaf without rupture</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Contra-rotating cylindrical rollers crush, tear, and curl leaves into pellets</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Leaf Cell Integrity</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Preserved cellular cuticles; essential oils remain sealed inside</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Ruptured cell membranes; fast volatile evaporation during storage</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Leaf Cell Integrity</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Preserved cellular cuticles; essential oils remain sealed inside</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Ruptured cell membranes; fast volatile evaporation during storage</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Flavor Profile</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Rich malt, dark cocoa, honey, sweet dried fruit; silky mouthfeel</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Intensely brisk, sharp, tannic, astringent, flat finish</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Flavor Profile</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Rich malt, dark cocoa, honey, sweet dried fruit; silky mouthfeel</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Intensely brisk, sharp, tannic, astringent, flat finish</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Ideal Consumption</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Pure black liquor or with a drop of honey; showcases estate terroir</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Boiled with cow's milk and pungent spices (Karak / Masala Chai)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Ideal Consumption</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Pure black liquor or with a drop of honey; showcases estate terroir</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Boiled with cow's milk and pungent spices (Karak / Masala Chai)</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Re-steep Potential</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2 to 3 exquisite infusions with evolving flavor layers</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Single infusion only; completely exhausted in 60 seconds</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Re-steep Potential</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2 to 3 exquisite infusions with evolving flavor layers</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Single infusion only; completely exhausted in 60 seconds</td>
           </tr>
         </tbody>
       </table>
@@ -439,18 +426,18 @@ function buildArticleHtml(meta) {
   ${authorBioCard}
 
   <!-- FAQ Section for FAQPage Schema -->
-  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1);">
+  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid #d6cfc2;">
     <h2>Frequently Asked Questions About Assam Tea</h2>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Can I add milk to Assam Orthodox tea?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Can I add milk to Assam Orthodox tea?</h3>
       <p>While Orthodox tea is crafted to be enjoyed pure black to appreciate its nuanced malt and cocoa notes, it has enough body to support a light splash of warm milk if you prefer a British-style afternoon tea.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Why is Orthodox tea more expensive than CTC tea?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Why is Orthodox tea more expensive than CTC tea?</h3>
       <p>Orthodox tea requires delicate selective plucking (only top leaves and tips), gentle manual handling, and specialized rolling tables that take hours longer to process than high-speed CTC crushing machines.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Where can I buy authentic whole leaf Assam Orthodox tea online?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Where can I buy authentic whole leaf Assam Orthodox tea online?</h3>
       <p>You can buy certified, single-estate Assam Orthodox whole leaf tea directly at <a href="https://www.brewyoursip.com/collections/assam-tea">Brew Your Sip</a>, backed by Unik Tea Centre's 35 years of Kolkata auction experience.</p>
     </div>
   </section>
@@ -463,13 +450,9 @@ function buildArticleHtml(meta) {
     return `
 <article class="artisan-blog-post" itemscope itemtype="https://schema.org/BlogPosting">
   <header class="blog-header">
-    <div class="blog-meta-tags">
-      <span class="blog-category">${meta.category}</span>
-      <span class="eeat-verified-tag" style="background:rgba(16,185,129,0.15); color:#10b981; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; margin-left:0.5rem;">✓ E-E-A-T Verified &bull; Cupping Lab Science</span>
-    </div>
-    <h1 itemprop="headline">${meta.title}</h1>
+    <meta itemprop="headline" content="${meta.title}" />
     ${eeatBanner}
-    <div class="blog-byline" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">
+    <div class="blog-byline" style="font-size:0.85rem; color:#5c6f63; margin-bottom:1.5rem;">
       <time datetime="${new Date().toISOString()}" itemprop="datePublished">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time> &bull; 
       <span>${meta.readTimeMinutes} Min Read</span> &bull; 
       <span>Brew Your Sip Laboratory Masterclass</span>
@@ -478,20 +461,20 @@ function buildArticleHtml(meta) {
 
   <!-- 16:9 Hero Image Container -->
   <div class="blog-hero-image-wrap" style="margin-bottom:2rem;">
-    <img src="/images/generated/${meta.heroImageName}.jpg" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" />
-    <span class="image-caption" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; text-align:center;">
+    <img src="${meta.heroImageUrl || `/images/generated/${meta.heroImageName}.jpg`}" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; display:block; box-shadow:0 8px 24px rgba(27,67,50,0.12);" />
+    <span class="image-caption" style="display:block; font-size:0.75rem; color:#5c6f63; margin-top:0.4rem; text-align:center;">
       Photo: ${meta.imageAlt} &bull; Visualized by Brew Your Sip Tea Science Lab.
     </span>
   </div>
 
   <!-- AEO Quick Answer Box -->
-  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:rgba(56,189,248,0.08); border-left:4px solid #38bdf8; padding:1.35rem; border-radius:8px; margin:2rem 0;">
-    <h3 style="margin-top:0; color:#38bdf8; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
-    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:var(--text-primary);" itemprop="description">
+  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:#f2f5f3; border-left:4px solid #1b4332; padding:1.35rem; border-radius:8px; margin:2rem 0;">
+    <h3 style="margin-top:0; color:#1b4332; font-size:1.15rem;">⚡ Quick Answer: ${aeo.question}</h3>
+    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:#1b4332;" itemprop="description">
       ${aeo.directAnswer}
     </p>
     <div class="aeo-stats-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:0.75rem; margin-top:1.2rem;">
-      ${aeo.stats.map(s => `<div style="background:rgba(255,255,255,0.05); padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:var(--text-muted); display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#38bdf8;">${s.value}</strong></div>`).join('')}
+      ${aeo.stats.map(s => `<div style="background:#ffffff; border:1px solid #d6cfc2; padding:0.65rem; border-radius:6px; font-size:0.85rem;"><span style="color:#5c6f63; display:block; font-size:0.75rem;">${s.label}:</span> <strong style="color:#1b4332;">${s.value}</strong></div>`).join('')}
     </div>
   </div>
 
@@ -513,12 +496,12 @@ function buildArticleHtml(meta) {
     </p>
 
     <!-- Lab Testing Box -->
-    <div class="cupping-notes-box" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1.25rem; margin:2rem 0;">
-      <h3 style="margin-top:0; color:#10b981; font-size:1.1rem;">🧪 Water Chemistry Case Study: TDS & pH Calibration</h3>
-      <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+    <div class="cupping-notes-box" style="background:#f9f7f2; border:1px solid #d6cfc2; border-radius:8px; padding:1.25rem; margin:2rem 0;">
+      <h3 style="margin-top:0; color:#1b4332; font-size:1.1rem;">🧪 Water Chemistry Case Study: TDS & pH Calibration</h3>
+      <p style="font-size:0.95rem; color:#3d5245; margin-bottom:0.75rem;">
         Conducted at the Unik Tea Centre Cupping Laboratory, Kolkata using calibrated digital TDS meters and pH probes across 4 distinct water profiles:
       </p>
-      <ul style="padding-left:1.5rem; font-size:0.92rem; color:var(--text-secondary); line-height:1.7;">
+      <ul style="padding-left:1.5rem; font-size:0.92rem; color:#3d5245; line-height:1.7;">
         <li><strong>High Hardness Municipal Water (TDS 350+ ppm):</strong> Bicarbonate ions act as a heavy alkaline buffer (pH 8.1). Calcium reacts with tea polyphenols to form an oily surface scum. Liquor tastes chalky, dull, and completely masks delicate First Flush florals.</li>
         <li><strong>Pure Distilled / Zero Water (TDS 0 ppm):</strong> Completely stripped of minerals. Yields an aggressively sharp, overly acidic extraction with an empty hollow mid-palate.</li>
         <li><strong>Calibrated Spring / Filtered Water (TDS 70–120 ppm, pH 6.8–7.1):</strong> The sweet spot. Mild calcium and magnesium mineral ions facilitate optimal solute transfer, producing crystal-clear liquor, radiant aroma, and a smooth, sweet lingering finish.</li>
@@ -530,49 +513,49 @@ function buildArticleHtml(meta) {
     <div class="table-responsive" style="margin:1.5rem 0;">
       <table class="data-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
         <thead>
-          <tr style="background:rgba(255,255,255,0.05);">
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Tea Variety</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Leaf Weight / 200ml</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Ideal Water Temp</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Steep Duration</th>
-            <th style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1); text-align:left;">Re-Steep Potential</th>
+          <tr style="background:#ebe5d8; color:#1b4332;">
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Tea Variety</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Leaf Weight / 200ml</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Ideal Water Temp</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Steep Duration</th>
+            <th style="padding:0.75rem; border:1px solid #d6cfc2; text-align:left;">Re-Steep Potential</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Darjeeling First Flush (Spring)</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2.5 grams</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">85°C (185°F)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">3 Minutes</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2 – 3 Infusions (+45s each)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Darjeeling First Flush (Spring)</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2.5 grams</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">85°C (185°F)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">3 Minutes</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2 – 3 Infusions (+45s each)</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Darjeeling Second Flush (Muscatel)</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2.5 grams</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">90°C (195°F)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">3.5 – 4 Minutes</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2 Infusions</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Darjeeling Second Flush (Muscatel)</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2.5 grams</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">90°C (195°F)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">3.5 – 4 Minutes</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2 Infusions</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Assam Orthodox Whole Leaf</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">3.0 grams</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">95°C (203°F)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">4 Minutes</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2 Infusions</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Assam Orthodox Whole Leaf</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">3.0 grams</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">95°C (203°F)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">4 Minutes</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2 Infusions</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Highland Green Tea</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2.0 grams</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">75°C – 80°C</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">2 Minutes</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">3 Infusions</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Highland Green Tea</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2.0 grams</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">75°C – 80°C</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">2 Minutes</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">3 Infusions</td>
           </tr>
           <tr>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);"><strong>Artisan Masala Chai</strong></td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">3.5 grams (with spice)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">100°C (Boiling)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">4 – 5 Minutes (Simmer)</td>
-            <td style="padding:0.75rem; border:1px solid rgba(255,255,255,0.1);">Single decoction with milk</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;"><strong>Artisan Masala Chai</strong></td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">3.5 grams (with spice)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">100°C (Boiling)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">4 – 5 Minutes (Simmer)</td>
+            <td style="padding:0.75rem; border:1px solid #d6cfc2;">Single decoction with milk</td>
           </tr>
         </tbody>
       </table>
@@ -598,18 +581,18 @@ function buildArticleHtml(meta) {
   ${authorBioCard}
 
   <!-- FAQ Section for FAQPage Schema -->
-  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1);">
+  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid #d6cfc2;">
     <h2>Frequently Asked Questions About Tea Brewing</h2>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Why does my green tea always taste bitter?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Why does my green tea always taste bitter?</h3>
       <p>Your green tea is bitter because you are likely pouring 100°C boiling water directly onto the tender leaves or steeping longer than 2 minutes. Drop your water temperature to 75°C–80°C and steep for strictly 120 seconds to unlock sweet umami without bitterness.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Does water quality really affect tea flavor?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Does water quality really affect tea flavor?</h3>
       <p>Yes. Water constitutes 99% of your cup. Hard municipal tap water packed with bicarbonates neutralizes tea acidity and flattens aroma, while filtered water with a TDS between 70 and 120 ppm produces optimal brightness and sweetness.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Can loose leaf tea be re-steeped?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Can loose leaf tea be re-steeped?</h3>
       <p>High quality single-estate whole leaf teas from <a href="https://www.brewyoursip.com">Brew Your Sip</a> can easily be re-steeped 2 to 3 times. Simply increase the steeping time by 45 seconds for each subsequent infusion.</p>
     </div>
   </section>
@@ -621,13 +604,9 @@ function buildArticleHtml(meta) {
   return `
 <article class="artisan-blog-post" itemscope itemtype="https://schema.org/BlogPosting">
   <header class="blog-header">
-    <div class="blog-meta-tags">
-      <span class="blog-category">${meta.category}</span>
-      <span class="eeat-verified-tag" style="background:rgba(16,185,129,0.15); color:#10b981; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; margin-left:0.5rem;">✓ E-E-A-T Verified &bull; First-Hand Cupping</span>
-    </div>
-    <h1 itemprop="headline">${meta.title}</h1>
+    <meta itemprop="headline" content="${meta.title}" />
     ${eeatBanner}
-    <div class="blog-byline" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">
+    <div class="blog-byline" style="font-size:0.85rem; color:#5c6f63; margin-bottom:1.5rem;">
       <time datetime="${new Date().toISOString()}" itemprop="datePublished">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time> &bull; 
       <span>${meta.readTimeMinutes} Min Read</span> &bull; 
       <span>Unik Tea Centre Heritage Cupping Analysis</span>
@@ -636,16 +615,16 @@ function buildArticleHtml(meta) {
 
   <!-- 16:9 Hero Image Container -->
   <div class="blog-hero-image-wrap" style="margin-bottom:2rem;">
-    <img src="/images/generated/${meta.heroImageName}.jpg" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" />
-    <span class="image-caption" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; text-align:center;">
+    <img src="${meta.heroImageUrl || `/images/generated/${meta.heroImageName}.jpg`}" alt="${meta.imageAlt}" itemprop="image" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; display:block; box-shadow:0 8px 24px rgba(27,67,50,0.12);" />
+    <span class="image-caption" style="display:block; font-size:0.75rem; color:#5c6f63; margin-top:0.4rem; text-align:center;">
       Photo: ${meta.imageAlt} &bull; Sourced directly by Brew Your Sip Tea Merchants.
     </span>
   </div>
 
   <!-- AEO Quick Answer Box -->
-  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:rgba(56,189,248,0.08); border-left:4px solid #38bdf8; padding:1.35rem; border-radius:8px; margin:2rem 0;">
-    <h3 style="margin-top:0; color:#38bdf8; font-size:1.15rem;">⚡ Quick Answer: ${meta.title}</h3>
-    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:var(--text-primary);" itemprop="description">
+  <div id="aeo-quick-answer" class="aeo-answer-callout" style="background:#f2f5f3; border-left:4px solid #1b4332; padding:1.35rem; border-radius:8px; margin:2rem 0;">
+    <h3 style="margin-top:0; color:#1b4332; font-size:1.15rem;">⚡ Quick Answer: ${meta.title}</h3>
+    <p style="font-size:1.05rem; line-height:1.6; font-weight:500; color:#1b4332;" itemprop="description">
       ${meta.metaDescription}
     </p>
   </div>
@@ -660,12 +639,12 @@ function buildArticleHtml(meta) {
     </p>
 
     <!-- Lab Cupping Box -->
-    <div class="cupping-notes-box" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1.25rem; margin:2rem 0;">
-      <h3 style="margin-top:0; color:#10b981; font-size:1.1rem;">🧪 Master Taster's Sensory Cupping Protocol (ISO 3103 Standard)</h3>
-      <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+    <div class="cupping-notes-box" style="background:#f9f7f2; border:1px solid #d6cfc2; border-radius:8px; padding:1.25rem; margin:2rem 0;">
+      <h3 style="margin-top:0; color:#1b4332; font-size:1.1rem;">🧪 Master Taster's Sensory Cupping Protocol (ISO 3103 Standard)</h3>
+      <p style="font-size:0.95rem; color:#3d5245; margin-bottom:0.75rem;">
         Conducted at Unik Tea Centre Cupping Laboratory, Kolkata using 2.83g whole leaf in 140ml boiling water at 5 minutes:
       </p>
-      <ul style="padding-left:1.5rem; font-size:0.92rem; color:var(--text-secondary); line-height:1.7;">
+      <ul style="padding-left:1.5rem; font-size:0.92rem; color:#3d5245; line-height:1.7;">
         <li><strong>Dry Leaf:</strong> Whole orthodox grade, high tip concentration, crisp botanical fragrance.</li>
         <li><strong>Wet Infused Leaf:</strong> Vibrant aromatic release, clean mountain terroir notes, zero sourness.</li>
         <li><strong>Liquor Hue:</strong> Clear luminous amber meniscus with zero cloudiness or bitter particulate haze.</li>
@@ -692,14 +671,14 @@ function buildArticleHtml(meta) {
   ${authorBioCard}
 
   <!-- FAQ Section -->
-  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1);">
+  <section class="blog-faq-section" style="margin-top:3rem; padding-top:2rem; border-top:1px solid #d6cfc2;">
     <h2>Frequently Asked Questions</h2>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Why choose single-estate loose leaf tea over commercial tea bags?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Why choose single-estate loose leaf tea over commercial tea bags?</h3>
       <p>Single-estate whole leaf preserves delicate antioxidants, intact essential oils, and genuine regional terroir, unlike tea bags which contain pulverized, rapidly oxidized dust and fannings.</p>
     </div>
     <div class="faq-item" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1.1rem; color:#38bdf8;">Where is Brew Your Sip based?</h3>
+      <h3 style="font-size:1.1rem; color:#1b4332;">Where is Brew Your Sip based?</h3>
       <p>Brew Your Sip is headquartered in Kolkata, West Bengal, drawing on the 35+ year heritage of Unik Tea Centre Pvt Ltd, active on the Kolkata Tea Auction Committee floors since 1988.</p>
     </div>
   </section>

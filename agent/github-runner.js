@@ -10,6 +10,7 @@ const { loadState, saveState, logActivity } = require('./agent-worker');
 const { BLOG_EDITORIAL_CALENDAR, generateFullBlogArticle } = require('./blog-writer');
 const { GMB_POST_SCHEDULE, generateNextGmbPost } = require('./gmb-local-agent');
 const { exportWordPressDraft, publishToWordPress, syncWordPressSchema } = require('./wordpress-connector');
+const { fetchGscInsights, publishGmbPost } = require('./google-connectors');
 
 // Parse task flag
 const args = process.argv.slice(2);
@@ -64,7 +65,11 @@ async function runGithubAction() {
     console.log(`   ✅ 16:9 Image Prompt Configured: "${newBlog.heroImagePrompt.substring(0, 70)}..."`);
     console.log(`   ✅ WordPress Draft exported to: ${draftPath}`);
     if (wpResult.published) {
-      console.log(`   🚀 Published to WordPress! Post ID: ${wpResult.postId} (${wpResult.status}) -> ${wpResult.link}`);
+      const actionVerb = wpResult.updated ? 'Updated' : 'Published';
+      console.log(`   🚀 ${actionVerb} on WordPress! Post ID: ${wpResult.postId} (${wpResult.status}) -> ${wpResult.link}`);
+      if (wpResult.mediaUrl) console.log(`   🖼️ 16:9 Featured Image Uploaded: ${wpResult.mediaUrl}`);
+      if (wpResult.yoastSynced) console.log(`   🎯 Yoast SEO Meta Synced (Title, Description, Focus Keyphrase)`);
+      if (wpResult.yoastWarning) console.log(`   ⚠️ ${wpResult.yoastWarning}`);
     } else if (wpResult.skipped) {
       console.log(`   ℹ️ WordPress REST API skipped: ${wpResult.reason}`);
     } else {
@@ -84,23 +89,45 @@ async function runGithubAction() {
     logActivity(`GitHub Actions: Created blog "${newBlog.title}" [E-E-A-T: 100/100]`, 'blog');
   }
 
-  // 3. Local GMB Post
+  // 3. Local GMB Post (Queues & optionally auto-publishes via Google Business Profile API)
   if (task === 'daily_cycle' || task === 'generate_gmb') {
-    console.log(`\n📍 [3/3] Queuing Weekly Google Business Profile Update...`);
+    console.log(`\n📍 [3/4] Processing Weekly Google Business Profile Update...`);
     const gmbIndex = state.gmbPosts.length % GMB_POST_SCHEDULE.length;
     const gmbPost = GMB_POST_SCHEDULE[gmbIndex];
+    const gmbResult = await publishGmbPost(gmbPost);
 
     console.log(`   ✅ GMB Headline: "${gmbPost.headline}"`);
     console.log(`   ✅ Local Kolkata & Pan-India Geo-Targeting: ${gmbPost.targetLocations.join(', ')}`);
     console.log(`   ✅ CTA: ${gmbPost.ctaType} -> ${gmbPost.ctaUrl}`);
+    if (gmbResult.published) {
+      console.log(`   🚀 Published live to Google Business Profile! ${gmbResult.searchUrl || gmbResult.name}`);
+    } else if (gmbResult.skipped) {
+      console.log(`   ℹ️ GMB API skipped: ${gmbResult.reason}`);
+    } else {
+      console.log(`   ⚠️ GMB API error: ${gmbResult.error}`);
+    }
 
-    stepSummary += `### 📍 3. Local GMB Post Queued\n`;
+    stepSummary += `### 📍 3. Local GMB Post\n`;
     stepSummary += `- **Headline**: ${gmbPost.headline}\n`;
     stepSummary += `- **Target Locations**: ${gmbPost.targetLocations.join(', ')}\n`;
     stepSummary += `- **Call To Action**: [${gmbPost.ctaType}](${gmbPost.ctaUrl})\n`;
-    stepSummary += `- **16:9 Visual Prompt**: *"${gmbPost.imagePrompt16x9}"*\n\n`;
+    stepSummary += `- **GMB API Status**: ${gmbResult.published ? `Published (${gmbResult.state})` : (gmbResult.skipped ? 'Queued locally (GBP secrets not set)' : gmbResult.error)}\n\n`;
 
-    logActivity(`GitHub Actions: Queued GMB post "${gmbPost.headline}"`, 'local');
+    logActivity(`GitHub Actions: Processed GMB post "${gmbPost.headline}"`, 'local');
+  }
+
+  // 4. Google Search Console (GSC) Analytics Sync
+  console.log(`\n📊 [4/4] Syncing Google Search Console (GSC) Insights...`);
+  const gscResult = await fetchGscInsights();
+  if (gscResult.connected) {
+    state.gscInsights = gscResult;
+    console.log(`   🚀 Connected to GSC (${gscResult.siteUrl}) — Fetched ${gscResult.topQueries.length} top search queries (${gscResult.period})`);
+    stepSummary += `### 📊 4. Google Search Console (GSC)\n- **Site**: ${gscResult.siteUrl}\n- **Top Queries Fetched**: ${gscResult.topQueries.length} (${gscResult.period})\n\n`;
+    logActivity(`GitHub Actions: Synced ${gscResult.topQueries.length} GSC queries`, 'health');
+  } else if (gscResult.skipped) {
+    console.log(`   ℹ️ GSC API skipped: ${gscResult.reason}`);
+  } else {
+    console.log(`   ⚠️ GSC API error: ${gscResult.error}`);
   }
 
   // Save updated state

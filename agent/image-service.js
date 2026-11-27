@@ -1,10 +1,13 @@
 /**
  * GEMINI 16:9 IMAGE GENERATION SERVICE
- * Manages 16:9 ratio visual assets for SEO/AEO/GEO blogs and GMB posts
+ * Manages 16:9 ratio visual assets for SEO/AEO/GEO blogs and GMB posts.
+ * Uses pre-generated 16:9 assets in public/images/generated/ and optionally
+ * calls Gemini Imagen 3 API when GEMINI_API_KEY is configured.
  */
 
 const path = require('path');
 const fs = require('fs');
+const axios = require('axios');
 
 const GENERATED_IMAGES_DIR = path.join(__dirname, '..', 'public', 'images', 'generated');
 
@@ -52,7 +55,49 @@ function getImageForArticle(articleSlug) {
   return IMAGE_CATALOG.find(img => img.articleSlug === articleSlug) || IMAGE_CATALOG[0];
 }
 
+// Ensures a 16:9 JPEG file exists on disk; generates via Gemini Imagen if GEMINI_API_KEY is set
+async function ensureHeroImageFile(heroImageName, prompt) {
+  if (!fs.existsSync(GENERATED_IMAGES_DIR)) {
+    fs.mkdirSync(GENERATED_IMAGES_DIR, { recursive: true });
+  }
+
+  const safeName = (heroImageName || 'darjeeling_first_flush_16_9').replace(/[^a-zA-Z0-9_-]/g, '');
+  const targetPath = path.join(GENERATED_IMAGES_DIR, `${safeName}.jpg`);
+
+  if (fs.existsSync(targetPath)) {
+    return { path: targetPath, generated: false };
+  }
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (apiKey && prompt) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+      const res = await axios.post(url, {
+        instances: [{ prompt }],
+        parameters: {
+          sampleCount: 1,
+          aspectRatio: '16:9',
+          outputOptions: { mimeType: 'image/jpeg' }
+        }
+      }, { timeout: 30000 });
+
+      const b64 = res.data && res.data.predictions && res.data.predictions[0] && res.data.predictions[0].bytesBase64Encoded;
+      if (b64) {
+        fs.writeFileSync(targetPath, Buffer.from(b64, 'base64'));
+        return { path: targetPath, generated: true };
+      }
+    } catch (err) {
+      console.warn(`   ⚠️ Gemini image generation fallback: ${err.message}`);
+    }
+  }
+
+  // Fallback to existing default 16:9 image so WordPress never gets a broken image
+  const fallbackPath = path.join(GENERATED_IMAGES_DIR, 'darjeeling_first_flush_16_9.jpg');
+  return { path: fs.existsSync(fallbackPath) ? fallbackPath : null, generated: false };
+}
+
 module.exports = {
   getImageCatalog,
-  getImageForArticle
+  getImageForArticle,
+  ensureHeroImageFile
 };

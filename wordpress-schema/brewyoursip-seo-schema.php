@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Brew Your Sip SEO / AEO / GEO Schema Injector
- * Description: Autonomous JSON-LD Organization, LocalBusiness, WebSite, and Speakable Schema for www.brewyoursip.com (WordPress / WooCommerce).
- * Version: 1.0.0
+ * Plugin Name: Brew Your Sip SEO / AEO / GEO Schema & Yoast REST Connector
+ * Description: Autonomous JSON-LD Organization, LocalBusiness, Speakable Schema, and Yoast SEO REST API meta registration for www.brewyoursip.com.
+ * Version: 1.1.0
  * Author: Brew Your Sip SEO Agent
  */
 
@@ -10,6 +10,30 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// 1. Expose Yoast SEO & Rank Math meta keys to the WordPress REST API so the autonomous agent can set Title, Meta Description, and Focus Keyphrase
+add_action( 'init', function() {
+    $seo_meta_keys = array(
+        '_yoast_wpseo_title',
+        '_yoast_wpseo_metadesc',
+        '_yoast_wpseo_focuskw',
+        'rank_math_title',
+        'rank_math_description',
+        'rank_math_focus_keyword',
+    );
+
+    foreach ( $seo_meta_keys as $meta_key ) {
+        register_post_meta( 'post', $meta_key, array(
+            'show_in_rest'  => true,
+            'single'        => true,
+            'type'          => 'string',
+            'auth_callback' => function() {
+                return current_user_can( 'edit_posts' );
+            },
+        ) );
+    }
+} );
+
+// 2. Inject Organization, LocalBusiness, and Speakable JSON-LD into wp_head
 add_action( 'wp_head', function() {
     $org_schema = array(
         '@context' => 'https://schema.org',
