@@ -119,20 +119,31 @@ async function runGithubAction() {
   // 4. Google Search Console (GSC) Analytics Sync
   console.log(`\n📊 [4/4] Syncing Google Search Console (GSC) Insights...`);
   const gscResult = await fetchGscInsights();
+  const freshState = loadState();
+  freshState.gscLastStatus = gscResult.connected
+    ? { connected: true, siteUrl: gscResult.siteUrl, queryCount: gscResult.topQueries.length, checkedAt: new Date().toISOString() }
+    : { connected: false, skipped: Boolean(gscResult.skipped), reason: gscResult.reason || gscResult.error, checkedAt: new Date().toISOString() };
+
   if (gscResult.connected) {
-    state.gscInsights = gscResult;
+    freshState.gscInsights = gscResult;
     console.log(`   🚀 Connected to GSC (${gscResult.siteUrl}) — Fetched ${gscResult.topQueries.length} top search queries (${gscResult.period})`);
     stepSummary += `### 📊 4. Google Search Console (GSC)\n- **Site**: ${gscResult.siteUrl}\n- **Top Queries Fetched**: ${gscResult.topQueries.length} (${gscResult.period})\n\n`;
+    saveState(freshState);
     logActivity(`GitHub Actions: Synced ${gscResult.topQueries.length} GSC queries`, 'health');
   } else if (gscResult.skipped) {
     console.log(`   ℹ️ GSC API skipped: ${gscResult.reason}`);
+    saveState(freshState);
   } else {
     console.log(`   ⚠️ GSC API error: ${gscResult.error}`);
+    stepSummary += `### 📊 4. Google Search Console (GSC)\n- **Status**: ⚠️ ${gscResult.error}\n\n`;
+    saveState(freshState);
+    logActivity(`GitHub Actions GSC Error: ${gscResult.error}`, 'warning');
   }
 
-  // Save updated state
-  state.lastRunAt = new Date().toISOString();
-  saveState(state);
+  // Save updated timestamp without overwriting logs
+  const finalState = loadState();
+  finalState.lastRunAt = new Date().toISOString();
+  saveState(finalState);
 
   // Write GitHub Actions Step Summary if in runner
   if (process.env.GITHUB_STEP_SUMMARY) {
