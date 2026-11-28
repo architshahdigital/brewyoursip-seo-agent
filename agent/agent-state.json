@@ -5,12 +5,32 @@
   "brand": "Brew Your Sip",
   "heritage": "Unik Tea Centre (Est. 1988, Kolkata)",
   "startedAt": "2026-09-22T08:44:40.872Z",
-  "lastRunAt": "2026-11-27T20:07:16.963Z",
+  "lastRunAt": "2026-11-28T14:37:37.398Z",
   "totalAuditsRun": 1,
   "totalBlogsCreated": 3,
   "totalGmbPostsQueued": 3,
   "shopifyThemeSynced": false,
   "logs": [
+    {
+      "timestamp": "2026-11-28T14:37:37.397Z",
+      "message": "GitHub Actions: Synced 15 GSC queries",
+      "type": "health"
+    },
+    {
+      "timestamp": "2026-11-28T14:37:36.524Z",
+      "message": "GitHub Actions: Processed GMB post \"Fresh 2026 Darjeeling First Flush Is Here! 🌸🍃\"",
+      "type": "local"
+    },
+    {
+      "timestamp": "2026-11-28T14:37:36.522Z",
+      "message": "GitHub Actions: Created blog \"Darjeeling First Flush: The Definitive 2026 Guide to Himalayan Terroir and Spring Harvest\" [E-E-A-T: 100/100]",
+      "type": "blog"
+    },
+    {
+      "timestamp": "2026-11-28T14:37:30.834Z",
+      "message": "GitHub Actions: Verified site health (HTTP 200)",
+      "type": "health"
+    },
     {
       "timestamp": "2026-11-27T20:07:16.962Z",
       "message": "GitHub Actions: Synced 15 GSC queries",
@@ -457,12 +477,12 @@
     "connected": true,
     "siteUrl": "sc-domain:brewyoursip.com",
     "queryCount": 15,
-    "checkedAt": "2026-11-27T20:07:16.961Z"
+    "checkedAt": "2026-11-28T14:37:37.396Z"
   },
   "gscInsights": {
     "connected": true,
     "siteUrl": "sc-domain:brewyoursip.com",
-    "period": "2026-10-30 to 2026-11-27",
+    "period": "2026-10-31 to 2026-11-28",
     "topQueries": [
       {
         "query": "most tea consuming state in india",
@@ -481,8 +501,8 @@
       {
         "query": "bharat mein sabse jyaada chai peene wala rajya",
         "clicks": 1,
-        "impressions": 22,
-        "ctr": 4.55,
+        "impressions": 24,
+        "ctr": 4.17,
         "position": 3.4
       },
       {
@@ -509,8 +529,8 @@
       {
         "query": "india me sabse jyada chai pine wala state",
         "clicks": 1,
-        "impressions": 17,
-        "ctr": 5.88,
+        "impressions": 18,
+        "ctr": 5.56,
         "position": 2.4
       },
       {
@@ -530,23 +550,23 @@
       {
         "query": "most tea drinking state in india",
         "clicks": 1,
-        "impressions": 21,
-        "ctr": 4.76,
+        "impressions": 23,
+        "ctr": 4.35,
         "position": 1.3
       },
       {
         "query": "pearl green tea",
         "clicks": 1,
-        "impressions": 23,
-        "ctr": 4.35,
+        "impressions": 24,
+        "ctr": 4.17,
         "position": 2
       },
       {
         "query": "which state drink more tea in india",
         "clicks": 1,
-        "impressions": 15,
-        "ctr": 6.67,
-        "position": 1.3
+        "impressions": 16,
+        "ctr": 6.25,
+        "position": 1.4
       },
       {
         "query": "$6.50 in indian rupees",
